@@ -1,0 +1,284 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-top: 4px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 700px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+/* Menu */
+.menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-left: 5px solid #ccc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s;
+}
+
+.menu-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card.unavailable {
+  opacity: 0.5;
+}
+
+.menu-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.menu-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.menu-price {
+  font-size: 13px;
+  color: #7f8c8d;
+}
+
+.unavailable-text {
+  font-size: 11px;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  color: #333;
+  line-height: 1;
+}
+
+.qty-btn:hover:not(:disabled) {
+  border-color: #3498db;
+  color: #3498db;
+}
+
+.qty-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Order Section */
+.order-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  height: fit-content;
+}
+
+.member-input {
+  margin-bottom: 16px;
+}
+
+.member-input label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.member-input input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.member-input input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.calc-btn {
+  flex: 1;
+  padding: 12px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calc-btn:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.calc-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.reset-btn {
+  padding: 12px 20px;
+  background: #fff;
+  color: #e74c3c;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-btn:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.error-msg {
+  background: #fdecea;
+  color: #c0392b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* Results */
+.result-card {
+  border-top: 2px solid #ecf0f1;
+  padding-top: 14px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.result-row .amount {
+  font-weight: 600;
+}
+
+.result-row.discount {
+  color: #e67e22;
+}
+
+.result-row.grand-total {
+  border-top: 2px solid #2c3e50;
+  margin-top: 8px;
+  padding-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.discount-section {
+  background: #fef9e7;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+
+.result-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e67e22;
+  margin-bottom: 4px;
+}
+
+.discount-item {
+  font-size: 12px;
+  color: #666;
+  padding: 2px 0;
+}
