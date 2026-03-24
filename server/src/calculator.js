@@ -1,25 +1,18 @@
 const menu = require("./menu");
 
-// Items eligible for the 5% pair discount
 const PAIR_DISCOUNT_ITEMS = ["orange", "pink", "green"];
 const PAIR_DISCOUNT_RATE = 0.05;
 const MEMBER_DISCOUNT_RATE = 0.1;
 const VALID_MEMBER_CARD = "12345";
 
-// Track Red set orders: { timestamp: Date }
 const redSetOrders = [];
 
 function getMenuItem(itemId) {
   return menu.find((m) => m.id === itemId);
 }
 
-/**
- * Check if Red set can be ordered right now.
- * Only 1 customer can order Red set within 1 hour.
- */
 function canOrderRedSet() {
   const oneHourAgo = Date.now() - 60 * 60 * 1000;
-  // Clean up old entries
   while (redSetOrders.length > 0 && redSetOrders[0] < oneHourAgo) {
     redSetOrders.shift();
   }
@@ -30,20 +23,11 @@ function recordRedSetOrder() {
   redSetOrders.push(Date.now());
 }
 
-// Exposed for testing
 function clearRedSetOrders() {
   redSetOrders.length = 0;
 }
 
-/**
- * Calculate the total price for an order.
- *
- * @param {Array<{itemId: string, quantity: number}>} items - ordered items
- * @param {string|null} memberCard - member card number (null if none)
- * @returns {{ subtotal, discountDetails, pairDiscountTotal, memberDiscount, grandTotal, error? }}
- */
 function calculateOrder(items, memberCard = null) {
-  // Validate items
   for (const item of items) {
     const menuItem = getMenuItem(item.itemId);
     if (!menuItem) {
@@ -54,7 +38,6 @@ function calculateOrder(items, memberCard = null) {
     }
   }
 
-  // Check Red set restriction
   const redOrder = items.find((i) => i.itemId === "red" && i.quantity > 0);
   if (redOrder) {
     if (!canOrderRedSet()) {
@@ -103,7 +86,6 @@ function calculateOrder(items, memberCard = null) {
 
   const afterPairDiscount = subtotal - pairDiscountTotal;
 
-  // Member discount: 10% of total after pair discounts (only for valid member card)
   let memberDiscount = 0;
   let memberValid = false;
   if (memberCard && memberCard.trim() === VALID_MEMBER_CARD) {
@@ -115,7 +97,6 @@ function calculateOrder(items, memberCard = null) {
 
   const grandTotal = afterPairDiscount - memberDiscount;
 
-  // Record Red set order if applicable
   if (redOrder) {
     recordRedSetOrder();
   }

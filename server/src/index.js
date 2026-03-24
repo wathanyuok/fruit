@@ -13,7 +13,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// GET /api/menu - Return all menu items
 app.get("/api/menu", (req, res) => {
   const menuWithAvailability = menu.map((item) => ({
     ...item,
@@ -22,8 +21,6 @@ app.get("/api/menu", (req, res) => {
   res.json(menuWithAvailability);
 });
 
-// POST /api/calculate - Calculate order total
-// Body: { items: [{ itemId, quantity }], memberCard: string|null }
 app.post("/api/calculate", (req, res) => {
   const { items, memberCard } = req.body;
 
